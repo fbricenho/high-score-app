@@ -1,3 +1,3 @@
-import TableCobalt from "./";
+import TableCobalt from "./TableCobalt";
 
 export default TableCobalt;

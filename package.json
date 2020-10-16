@@ -11,6 +11,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
+    "concurrently": "^5.3.0",
     "fontsource-roboto": "^3.0.3",
     "json-server": "^0.16.2",
     "prettier": "^2.1.2",
@@ -19,11 +20,15 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently --kill-others-on-fail \"react-scripts start\" \"npm run mock-server\"",
     "build": "react-scripts build",
     "test": "react-scripts test --maxWorkers=1",
     "eject": "react-scripts eject",
-    "mock-server": "json-server -p 8000 --watch ./db.json"
+    "mock-server": "json-server -p 8000 --watch ./db.json",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --port 8001",
+    "cypress:ci:run": "wait-on http://localhost:3000 && npm run cypress:run",
+    "start:cypress": "concurrently --kill-others-on-fail \"npm run start\" \"npm run cypress:ci:run\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,6 +45,14 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/utils/*.{ts,jsx,tsx}",
+      "!src/modules/**/*.{js,jsx, tsx}",
+      "!/node_modules/",
+      "!/cypress/"
+    ]
+  },
   "devDependencies": {
     "@types/cors": "^2.8.8",
     "@types/jest": "^24.9.1",
@@ -47,6 +60,8 @@
     "@types/node": "^12.12.67",
     "@types/react": "^16.9.52",
     "@types/react-dom": "^16.9.8",
-    "typescript": "^3.7.5"
+    "cypress": "^5.4.0",
+    "typescript": "^3.7.5",
+    "wait-on": "^5.2.0"
   }
 }

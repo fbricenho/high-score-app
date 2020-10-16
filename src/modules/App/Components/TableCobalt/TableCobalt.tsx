@@ -1,6 +1,7 @@
 import React from "react";
 import { ListOfUser } from "types";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import { divideWithCondition, sortUserWithCondition } from "utils/helpers";
 
 const TableCobalt = ({ listOfUser, useAvg }: { listOfUser: ListOfUser; useAvg: boolean }) => {
   return (
@@ -16,9 +17,7 @@ const TableCobalt = ({ listOfUser, useAvg }: { listOfUser: ListOfUser; useAvg: b
         </TableHead>
         <TableBody>
           {listOfUser
-            .sort((a, b) =>
-              useAvg ? b.totalPoints / b.clicks - a.totalPoints / a.clicks : b.totalPoints - a.totalPoints
-            )
+            .sort((a, b) => sortUserWithCondition(a, b, useAvg))
             .slice(0, 10)
             .map((user, index) => (
               <TableRow key={index}>
@@ -27,7 +26,7 @@ const TableCobalt = ({ listOfUser, useAvg }: { listOfUser: ListOfUser; useAvg: b
                 </TableCell>
                 <TableCell align="right">{user.clicks}</TableCell>
                 <TableCell align="right">{user.totalPoints}</TableCell>
-                <TableCell align="right">{(user.totalPoints / user.clicks).toFixed(2)}</TableCell>
+                <TableCell align="right">{divideWithCondition(user.totalPoints, user.clicks).toFixed(2)}</TableCell>
               </TableRow>
             ))}
         </TableBody>

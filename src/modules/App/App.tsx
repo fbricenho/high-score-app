@@ -43,8 +43,8 @@ const App: React.FC = () => {
   return (
     <MuiThemeProvider theme={mainTheme}>
       <Wrapper>
-        <Card style={{ minWidth: "600px", padding: "16px" }}>
-          <Typography variant="h3" align="center">
+        <Card id="card" style={{ minWidth: "600px", padding: "16px" }}>
+          <Typography data-cy="headline" variant="h3" align="center">
             Leaderboard
           </Typography>
 
@@ -61,6 +61,7 @@ const App: React.FC = () => {
           <TextField
             fullWidth
             value={name}
+            data-cy="input-name"
             label="Name"
             onChange={(e) => setName(e.target.value)}
             variant="outlined"
@@ -72,7 +73,9 @@ const App: React.FC = () => {
           <Typography align="center" variant="h6">
             Your current score is: {score.toString()}
             <br />
-            <Typography variant="caption">You have {counter.toString()} tries left.</Typography>
+            <Typography data-cy="counter" variant="caption">
+              You have {counter.toString()} tries left.
+            </Typography>
           </Typography>
 
           <Button
@@ -80,11 +83,12 @@ const App: React.FC = () => {
             variant="outlined"
             color="primary"
             size="large"
+            data-cy="generate"
             fullWidth
             onClick={() => handleGenerateAction()}
             style={{ margin: "8px 0" }}
           >
-            <Typography>Generate</Typography>
+            <Typography variant="button">Try your luck</Typography>
           </Button>
 
           <Button
@@ -92,10 +96,11 @@ const App: React.FC = () => {
             type="submit"
             variant="contained"
             color="primary"
+            data-cy="submit"
             size="large"
             fullWidth
           >
-            Submit
+            <Typography variant="button">Send it!</Typography>
           </Button>
         </Card>
       </Wrapper>
