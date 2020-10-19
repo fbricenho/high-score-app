@@ -53,10 +53,11 @@ const App: React.FC = () => {
           <Typography align={"right"} variant={"body2"}>
             <FormControlLabel
               value="start"
-              control={<Switch edge="end" color="primary" />}
+              control={<Switch edge="end" color="primary" onClick={() => setUseAvg(!useAvg)} />}
               label="Do you want to sort by Avg?"
               labelPlacement="start"
-              onClick={() => setUseAvg(!useAvg)}
+
+
             />
           </Typography>
 
