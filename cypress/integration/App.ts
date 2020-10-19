@@ -9,6 +9,7 @@ describe("App", () => {
 
   it('typing on "name" input', () => {
     cy.get("#card").find("input[type=text]").type("Fran", { force: true });
+    cy.get("input[type=text]").should("have.value", "Fran");
   });
 
   it('Find "Try your luck" button', () => {
