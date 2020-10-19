@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import theme from "theme";
 import { createMuiTheme, MuiThemeProvider, responsiveFontSizes } from "@material-ui/core/styles";
 import Wrapper from "./Components/Wrapper";
-import { Button, Card, FormControlLabel, Switch, TextField, Typography } from "@material-ui/core";
+import { Button, Card, Divider, FormControlLabel, Switch, TextField, Typography } from "@material-ui/core";
 import LeaderboardService from "services/leaderboardService";
 import { ListOfUser } from "types";
 import { generateRandomInteger } from "utils/helpers";
@@ -43,18 +43,23 @@ const App: React.FC = () => {
   return (
     <MuiThemeProvider theme={mainTheme}>
       <Wrapper>
-        <Card id="card" style={{ minWidth: "600px", padding: "16px" }}>
+        <Card id="card" style={{ maxWidth: "600px", width: "100%", padding: "16px" }}>
           <Typography data-cy="headline" variant="h3" align="center">
             Leaderboard
           </Typography>
 
-          <FormControlLabel
-            value="start"
-            control={<Switch edge="end" color="primary" />}
-            label="Do you want to sort by Avg?"
-            labelPlacement="start"
-            onClick={() => setUseAvg(!useAvg)}
-          />
+          <Divider variant="middle" style={{margin: "16px 0"}} />
+
+          <Typography align={"right"} variant={"body2"}>
+            <FormControlLabel
+              value="start"
+              control={<Switch edge="end" color="primary" />}
+              label="Do you want to sort by Avg?"
+              labelPlacement="start"
+              onClick={() => setUseAvg(!useAvg)}
+            />
+          </Typography>
+
 
           {listOfUser && <TableCobalt listOfUser={listOfUser} useAvg={useAvg} />}
 
