@@ -29,7 +29,7 @@ const App: React.FC = () => {
   const handleSubmit = () => {
     if (name) {
       LeaderboardService.pushNewEntryLeaderboard({ name, totalPoints: score, clicks: 10 - counter }).then((user) => {
-        setListOfUser([...listOfUser, user]);
+        updateDataTable();
         setCounter(10);
         setScore(0);
         setName("");
